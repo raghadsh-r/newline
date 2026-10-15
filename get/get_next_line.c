@@ -6,7 +6,7 @@
 /*   By: ralshraw <ralshraw@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/15 10:17:04 by ralshraw          #+#    #+#             */
-/*   Updated: 2026/10/15 17:52:15 by ralshraw         ###   ########.fr       */
+/*   Updated: 2026/10/15 18:13:40 by ralshraw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,13 +61,10 @@ char	*cheak_numword(char **file, int x)
 	return (x);
 }
 
-char	*read_va(char **file, int fd)
+char	*read_va(char **file, int fd, int x,char *line)
 {
 	char	*temp;
-	char	*line;
-	int		x;
 
-	x = 1;
 	while (ft_strchr(*file) == -1 && x > 0)
 	{
 		temp = malloc(BUFFER_SIZE + 1);
@@ -101,6 +98,9 @@ char	*get_next_line(int fd)
 	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
 	line = if_there_is_value(&file);
+	if (line && file)
+		return (line);
+	line = read_va(&file,fd,1,line);
 	if (line && file)
 		return (line);
 	if (file && file[0])
